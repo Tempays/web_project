@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title%}
+Главная страница
+{% endblock %}
+
+{% block body%}
+<h1><center>Регистрация</center></h1>
+<div class="container">
+    <form class="login_form" method="post">
+        <div>Login/email</div>
+        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
+        <br>
+        <div>Password</div>
+        <input type="password" class="form-control" id="hashed_password" name="hashed_password">
+        <br>
+        <div>Repeat password</div>
+        <input type="password" class="form-control" id="r-password" name="r-password">
+        <br>
+        <div>Surname</div>
+        <input type="text" class="form-control" id="surname" name="surname">
+        <br>
+        <div>Name</div>
+        <input type="text" class="form-control" id="name" name="name">
+        <br>
+        <div>Age</div>
+        <input type="text" class="form-control" id="age" name="age">
+        <br>
+        <input type="submit" class="btn btn-success" value="Зарегистрироваться">
+    </form>
+</div>
+{% endblock %}
