@@ -1,3 +1,4 @@
+from flask_login import UserMixin
 from sqlalchemy import orm
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -6,7 +7,8 @@ import sqlalchemy
 import datetime
 
 
-class User(SqlAlchemyBase):
+class User(SqlAlchemyBase, UserMixin):
+    __tablename__ = 'User'
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     username = sqlalchemy.Column(sqlalchemy.String, unique=True)
     rating = sqlalchemy.Column(sqlalchemy.Integer, default=0)
