@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title%}
+Главная страница
+{% endblock %}
+
+{% block body%}
+<h1 xmlns="http://www.w3.org/1999/html"><center>Объявление</center></h1>
+<div class="container">
+    <form class="login_form" method="post">
+        <div>Страна</div>
+        <input type="text" class="form-control" id="country" aria-describedby="emailHelp" name="country">
+        <br>
+        <div>Город</div>
+        <input type="text" class="form-control" id="city" name="city">
+        <br>
+        <div>Цена</div>
+        <input type="text" class="form-control" id="price" name="price">
+        <br>
+        <div>Количество комнат</div>
+        <input type="text" class="form-control" id="count_of_rooms" name="count_of_rooms">
+        <br>
+        <div>Описание</div>
+        <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+        <br>
+        <div class="form-group">
+            <label for="photo">Приложите фотографию</label>
+            <input type="file" class="form-control-file" id="photo" name="file">
+        </div>
+        <br>
+        <input type="submit" class="btn btn-success" value="Выложить">
+    </form>
+</div>
+{% endblock %}
