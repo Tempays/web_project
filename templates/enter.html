@@ -7,23 +7,18 @@
 {% block body%}
 <h1><center>Вход</center></h1>
 <div class="container">
-    <form class="login_form" method="post">
-        <div>Login/email</div>
-        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
+    <form action="" method="post" novalidate>
+        {{ form.csrf_token }}
+        {% for field in form if field.name != 'csrf_token' and field.name != 'submit' and field.name != 'remember_me'%}
+            <div>{{ field.label }}</div>
+            {{ field(type=field.name, class="form-control") }}
+            <br>
+        {% endfor %}
+        {{ form.remember_me() }} {{ form.remember_me.label }}
         <br>
-        <div>Password</div>
-        <input type="password" class="form-control" id="hashed_password" name="hashed_password">
         <br>
-        <div>Surname</div>
-        <input type="text" class="form-control" id="surname" name="surname">
-        <br>
-        <div>Name</div>
-        <input type="text" class="form-control" id="name" name="name">
-        <br>
-        <div>Age</div>
-        <input type="text" class="form-control" id="age" name="age">
-        <br>
-        <input type="submit" class="btn btn-success" value="Войти">
+        {{ form.submit(type="submit", class="btn btn-primary") }}
     </form>
+    {{ message }}
 </div>
 {% endblock %}

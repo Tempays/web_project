@@ -4,13 +4,23 @@ from data import db_session
 from data.db_session import create_session
 from data.user import User
 from forms import RegisterForm, LoginForm
-from flask_login import login_user
+from flask_login import login_user, LoginManager, logout_user
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'special_secret_key_kyoma'
 
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    db_sess = db_session.create_session()
+    return db_sess.query(User).filter(User.id == user_id).first()
+
 
 def main():
+    db_session.global_init("db/data.db")
     app.run()
 
 
@@ -33,13 +43,18 @@ def register():
                                    form=form,
                                    message="Такой пользователь уже есть")
         user = User(
-            username=form.username.data,
+            username=form.login.data,
             email=form.email.data)
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
         return redirect('/login')
-    return render_template('register.html', title='Регистрация', form=form)
+    return render_template('register.html', title='Регистрация', form=form, message='')
+
+
+@app.route('/login')
+def login_():
+    return redirect('/enter')
 
 
 @app.route('/enter', methods=['GET', 'POST'])
@@ -55,6 +70,12 @@ def login():
                                message="Неправильный логин или пароль",
                                form=form)
     return render_template('enter.html', title='Авторизация', form=form)
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect("/")
 
 
 

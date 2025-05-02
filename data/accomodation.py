@@ -7,6 +7,7 @@ from data.db_session import SqlAlchemyBase
 
 
 class Accomodation(SqlAlchemyBase):
+    __tablename__ = 'Accomodation'
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     name = sqlalchemy.Column(sqlalchemy.String)

@@ -17,10 +17,8 @@ class User(SqlAlchemyBase, UserMixin):
     registration_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now())
     housing = orm.relationship('Accomodation', back_populates='owner')
 
+    def set_password(self, password):
+        self.hashed_password = generate_password_hash(password)
 
-def set_password(self, password):
-    self.hashed_password = generate_password_hash(password)
-
-
-def check_password(self, password):
-    return check_password_hash(self.hashed_password, password)
+    def check_password(self, password):
+        return check_password_hash(self.hashed_password, password)
