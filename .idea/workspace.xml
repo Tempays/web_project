@@ -4,16 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2dcbb418-6982-4c5f-bc42-9e94db512c44" name="Changes" comment="Оптимизация некоторых шаблонов, подключение обработчиков регистрации и авторизации к соответствующим шаблонам, реализация логаута">
+    <list default="true" id="2dcbb418-6982-4c5f-bc42-9e94db512c44" name="Changes" comment="Небольшие доработки кода, привод шаблона добавления жилья в соответствие с формой, добавление соответствующего обработчика, пока без сохранения данных">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/__all_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/__all_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/accomodation.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/accommodation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/accommodation.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/accommodation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/db/data.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/advertisement.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/advertisement.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,12 +133,21 @@
       <option name="project" value="LOCAL" />
       <updated>1746201114233</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Небольшие доработки кода, привод шаблона добавления жилья в соответствие с формой, добавление соответствующего обработчика, пока без сохранения данных">
+      <option name="closed" value="true" />
+      <created>1746275531105</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1746275531105</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Создание обработчика главной страницы, образов бд для пользователей и жилья" />
     <MESSAGE value="Оптимизация некоторых шаблонов, подключение обработчиков регистрации и авторизации к соответствующим шаблонам, реализация логаута" />
-    <option name="LAST_COMMIT_MESSAGE" value="Оптимизация некоторых шаблонов, подключение обработчиков регистрации и авторизации к соответствующим шаблонам, реализация логаута" />
+    <MESSAGE value="Небольшие доработки кода, привод шаблона добавления жилья в соответствие с формой, добавление соответствующего обработчика, пока без сохранения данных" />
+    <option name="LAST_COMMIT_MESSAGE" value="Небольшие доработки кода, привод шаблона добавления жилья в соответствие с формой, добавление соответствующего обработчика, пока без сохранения данных" />
   </component>
 </project>

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect
 
 from data import db_session
+from data.accommodation import Accommodation
 from data.db_session import create_session
 from data.user import User
 from forms import RegisterForm, LoginForm, AccommodationAddForm
@@ -89,7 +90,21 @@ def add_accommodation():
         return redirect('/')
     form = AccommodationAddForm()
     if form.validate_on_submit():
-        return "Все отправлено"
+        db_sess = db_session.create_session()
+        accommodation = Accommodation(
+            name = form.name.data,
+            cost = form.cost.data,
+            description = form.description.data,
+            accommodation_owner = current_user.id
+        )
+        db_sess.add(accommodation)
+        db_sess.commit()
+        photo_path = f'static/images/accommodation_images/{accommodation.id}.jpg'
+        with open(photo_path, 'wb') as photo:
+            photo.write(form.photo.data.read())
+        accommodation.photo_path = photo_path
+        db_sess.commit()
+        return 'Успешно'
     return render_template('advertisement.html', form=form)
 
 
