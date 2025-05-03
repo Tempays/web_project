@@ -6,8 +6,8 @@ from sqlalchemy import orm
 from data.db_session import SqlAlchemyBase
 
 
-class Accomodation(SqlAlchemyBase):
-    __tablename__ = 'Accomodation'
+class Accommodation(SqlAlchemyBase):
+    __tablename__ = 'Accommodation'
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     name = sqlalchemy.Column(sqlalchemy.String)
@@ -15,5 +15,5 @@ class Accomodation(SqlAlchemyBase):
     cost = sqlalchemy.Column(sqlalchemy.Integer)
     description = sqlalchemy.Column(sqlalchemy.String)
     photo_path = sqlalchemy.Column(sqlalchemy.String)
-    accomodation_owner = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('User.id'))
+    accommodation_owner = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('User.id'))
     owner = orm.relationship('User')

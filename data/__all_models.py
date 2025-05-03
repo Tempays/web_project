@@ -1,2 +1,2 @@
 from . import user
-from . import accomodation
+from . import accommodation

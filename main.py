@@ -3,8 +3,8 @@ from flask import Flask, render_template, redirect
 from data import db_session
 from data.db_session import create_session
 from data.user import User
-from forms import RegisterForm, LoginForm
-from flask_login import login_user, LoginManager, logout_user
+from forms import RegisterForm, LoginForm, AccommodationAddForm
+from flask_login import login_user, LoginManager, logout_user, current_user
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'special_secret_key_kyoma'
@@ -76,6 +76,21 @@ def login():
 def logout():
     logout_user()
     return redirect("/")
+
+
+@app.route('/about')
+def about():
+    return 'О нас (пока пусто)'
+
+
+@app.route('/add_accommodation', methods=['GET', 'POST'])
+def add_accommodation():
+    if not current_user.is_authenticated:
+        return redirect('/')
+    form = AccommodationAddForm()
+    if form.validate_on_submit():
+        return "Все отправлено"
+    return render_template('advertisement.html', form=form)
 
 
 

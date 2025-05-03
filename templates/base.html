@@ -26,12 +26,13 @@
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/about">Про нас</a>
         {% if current_user.is_authenticated %}
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/logout">{{ current_user.username }}</a>
+        <a class="btn btn-warning" href="/add_accommodation">Подать объявление</a>
         {% else %}
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/register">Регистрация</a>
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/enter">Вход</a>
         {% endif %}
       </nav>
-        <a class="btn btn-warning" href="/create-advertisement">Создать</a>
+
     </div>
   </header>
     {% block body%}{% endblock %}
