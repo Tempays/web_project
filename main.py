@@ -108,6 +108,12 @@ def add_accommodation():
     return render_template('advertisement.html', form=form)
 
 
+@app.route('/aa')
+def ff():
+    return render_template('user_profile.html')
+
+
+
 
 if __name__ == '__main__':
     main()
