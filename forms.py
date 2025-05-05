@@ -29,3 +29,8 @@ class AccommodationAddForm(FlaskForm):
     submit = SubmitField('Подтвердить')
 
 
+class ProfileForm(FlaskForm):
+    photo = FileField('Фото', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Только изображения!')], default='')
+    submit = SubmitField('Подтвердить')
+
+

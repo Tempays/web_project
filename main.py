@@ -1,10 +1,10 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, request
 
 from data import db_session
 from data.accommodation import Accommodation
 from data.db_session import create_session
 from data.user import User
-from forms import RegisterForm, LoginForm, AccommodationAddForm
+from forms import RegisterForm, LoginForm, AccommodationAddForm, ProfileForm
 from flask_login import login_user, LoginManager, logout_user, current_user
 
 app = Flask(__name__)
@@ -49,7 +49,7 @@ def register():
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
-        return redirect('/login')
+        return redirect('/enter')
     return render_template('register.html', title='Регистрация', form=form, message='')
 
 
@@ -67,7 +67,7 @@ def login():
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
             return redirect("/")
-        return render_template('login.html',
+        return render_template('enter.html',
                                message="Неправильный логин или пароль",
                                form=form)
     return render_template('enter.html', title='Авторизация', form=form)
@@ -108,9 +108,21 @@ def add_accommodation():
     return render_template('advertisement.html', form=form)
 
 
-@app.route('/aa')
-def ff():
-    return render_template('user_profile.html')
+@app.route('/user_profile/<user_id>', methods=['GET', 'POST'])
+def user_profile(user_id):
+    db_sess = db_session.create_session()
+    user = db_sess.query(User).where(User.id == user_id).first()
+    date = '.'.join((str(user.registration_date)).split()[0].split('-'))
+    rating = '★' * int(user.rating) + '☆' * (5 - int(user.rating))
+    filename = f'images/users/{user_id}.jpg'
+    form = ProfileForm()
+    if form.validate_on_submit():
+        photo_path = f'static/images/users/{user_id}.jpg'
+        with open(photo_path, 'wb') as photo:
+            photo.write(form.photo.data.read())
+        user.picture_path = photo_path
+        db_sess.commit()
+    return render_template('user_profile.html', user=user, date=date, rating=rating, form=form, filename=filename)
 
 
 

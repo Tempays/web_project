@@ -16,6 +16,7 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     email = sqlalchemy.Column(sqlalchemy.String)
     hashed_password = sqlalchemy.Column(sqlalchemy.String, unique=True)
     registration_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now())
+    picture_path = sqlalchemy.Column(sqlalchemy.String)
     housing = orm.relationship('Accommodation', back_populates='owner')
 
     def set_password(self, password):
