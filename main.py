@@ -95,6 +95,7 @@ def add_accommodation():
             name = form.name.data,
             cost = form.cost.data,
             description = form.description.data,
+            address = form.address.data,
             accommodation_owner = current_user.id
         )
         db_sess.add(accommodation)
@@ -112,6 +113,8 @@ def add_accommodation():
 def user_profile(user_id):
     db_sess = db_session.create_session()
     user = db_sess.query(User).where(User.id == user_id).first()
+    if not user:
+        return redirect('/#')
     date = '.'.join((str(user.registration_date)).split()[0].split('-'))
     rating = '★' * int(user.rating) + '☆' * (5 - int(user.rating))
     filename = f'images/users/{user_id}.jpg'
@@ -123,6 +126,19 @@ def user_profile(user_id):
         user.picture_path = photo_path
         db_sess.commit()
     return render_template('user_profile.html', user=user, date=date, rating=rating, form=form, filename=filename)
+
+
+@app.route('/accommodation_page/<accommodation_id>')
+def accommodation_page(accommodation_id):
+    db_sess = create_session()
+    accommodation = db_sess.query(Accommodation).where(Accommodation.id == accommodation_id).first()
+    if not accommodation:
+        return redirect('/#')
+    filename = accommodation.photo_path[6:]
+    rating = '★' * int(accommodation.rating) + '☆' * (5 - int(accommodation.rating))
+    return render_template('adver.html', accommodation=accommodation, filename=filename, rating=rating)
+
+
 
 
 

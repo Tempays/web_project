@@ -16,5 +16,7 @@ class Accommodation(SqlAlchemyBase, SerializerMixin):
     cost = sqlalchemy.Column(sqlalchemy.Integer)
     description = sqlalchemy.Column(sqlalchemy.String)
     photo_path = sqlalchemy.Column(sqlalchemy.String, default='')
+    address = sqlalchemy.Column(sqlalchemy.String, default='')
     accommodation_owner = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('User.id'))
+    rating = sqlalchemy.Column(sqlalchemy.Integer)
     owner = orm.relationship('User')

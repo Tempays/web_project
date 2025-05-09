@@ -7,41 +7,41 @@
 {% block body%}
 <div class="container">
     <div class="info-item">
-                <span class="label">Название:</span>
+                <span class="label">{{ accommodation.name }}:</span>
                 <span class="value"></span>
             </div>
 <br>
 <br>
 <br>
-<svg aria-label="Placeholder: Thumbnail" class="bd-placeholder-img card-img-top" height="350" preserveAspectRatio="xMidYMid slice" role="img" width="100%" xmlns="http://www.w3.org/2000/svg"><title>Placeholder</title><rect width="50%" height="100%" fill="#55595c"></rect></svg>
+    <img src="{{ url_for('static', filename=filename)}}" alt="Фото жилья" width="500px" height="250px">
 <br>
 <br>
 <br>
     <div class="info-item">
-                <span class="label">Страна:</span>
-                <span class="value"></span>
-            </div>
-    <br>
-    <div class="info-item">
-                <span class="label">Город:</span>
-                <span class="value"></span>
+                <span class="label">Адрес:</span>
+                <span class="value">{{ accommodation.address }}</span>
             </div>
     <br>
     <div class="info-item">
                 <span class="label">Цена:</span>
-                <span class="value"></span>
+                <span class="value">{{ accommodation.cost }}</span>
             </div>
     <br>
     <div class="info-item">
-                <span class="label">Количество комнат:</span>
-                <span class="value"></span>
-            </div>
+                <span class="value"><a href="/user_profile/{{ accommodation.owner.id }}">Владелец</a></span>
+    </div>
     <br>
     <div class="info-item">
                 <span class="label">Описание:</span>
-                <span class="value">Таде́уш Петшико́вский (пол. Tadeusz Pietrzykowski — [tadɛˈuʂ pjɛtʂɨkɔˈfskʲi]; 8 апреля 1917, Варшава, — 17 апреля 1991, Бельско-Бяла, Польша) — польский боксёр; один из первых узников концентрационного лагеря Аушвиц (лагерный номер 77). Вошёл в историю как боксёр в концлагерях Аушвиц-Биркенау и Нойенгамме. Чемпион Варшавы по боксу в легчайшем весе (1937). Первый чемпион Аушвица по боксу в открытой весовой категории.
-
-После войны выступал свидетелем в суде над Рудольфом Хёссом. История жизни Петшиковского стала предметом нескольких книг и фильмов.</span>
+                <span class="value">{{ accommodation.description }}</span>
             </div>
+    <div class="info-item">
+        <span class="label">Дата подачи объявления</span>
+        <span> {{ accommodation.date }} </span>
+    </div>
+    <div class="info-item">
+        <span class="label">Оценка</span>
+        <span> {{ accommodation.rating }} {{ rating }}</span>
+    </div>
 </div>
 {% endblock %}

@@ -24,7 +24,7 @@ class AccommodationAddForm(FlaskForm):
     name = StringField('Название объявления', validators=[DataRequired()])
     description = StringField('Описание жилья', validators=[DataRequired()])
     cost = StringField('Стоимость', validators=[DataRequired()])
-    address = StringField('Адрес', validators=[DataRequired()])
+    address = StringField('Адрес (Разделяйте значения запятой)', validators=[DataRequired()])
     photo = FileField('Фото', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Только изображения!')])
     submit = SubmitField('Подтвердить')
 
