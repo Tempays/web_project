@@ -10,6 +10,7 @@
     <body>
     <div class="row">
     <div class="profile-container">
+        {% if current_user.id == user.id %}
         <form method="POST" action="" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <div class="avatar-container">
@@ -24,6 +25,12 @@
         </div>
             {{ form.submit(type="submit", class="btn btn-primary") }}
         </form>
+        {% else %}
+        <div class="avatar-container">
+            <div class="avatar-overlay"></div>
+            <img src="{{ url_for('static', filename=filename)}}" class="avatar" alt="Аватар">
+        </div>
+        {% endif %}
 
         <div class="user-info">
             <div class="info-item">
@@ -47,20 +54,24 @@
     </div>
             <div class="col-12 col-md-8">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3>Мои объявления</h3>
+                {% if current_user.id == user.id %}
+                <h3>Ваши объявления</h3>
                 <a href="/add_accommodation" class="btn btn-primary">
                     Добавить жильё
                 </a>
+                {% else %}
+                <h3>Объявления пользователя</h3>
+                {% endif %}
             </div>
 
             <div class="row">
                 {% if accommodations %}
-                    {% for accommodation in user.housing %}
+                    {% for accommodation in accommodations %}
                     <div class="col-12 col-md-6 col-lg-4 mb-4">
                         <div class="card h-100 shadow-sm">
-                            <img src="{{ url_for('static', filename='uploads/' + accommodation.images[0]) }}"
+                            <img src="{{ url_for('static', filename=accommodation.photo_path) }}"
                                  class="card-img-top img-fluid"
-                                 alt="{{ accommodation.title }}"
+                                 alt="{{ accommodation.name }}"
                                  style="height: 200px; object-fit: cover;">
 
                             <div class="card-body">
@@ -73,6 +84,7 @@
                                     <span class="badge bg-warning text-dark">
                                         {{ accommodation.price }}₽ / ночь
                                     </span>
+                                    {% if current_user.id == user.id %}
                                     <div class="btn-group">
                                         <a href="/edit/{{ accommodation.id }}"
                                            class="btn btn-sm btn-outline-secondary">
@@ -83,23 +95,31 @@
                                             Удалить
                                         </a>
                                     </div>
+                                    {% endif %}
                                 </div>
                             </div>
 
                             <div class="card-footer bg-transparent">
                                 <small class="text-muted">
-                                    Опубликовано: {{ accommodation.created_at.strftime('%d.%m.%Y') }}
+                                    Опубликовано: {{ accommodation.date }}
                                 </small>
                             </div>
                         </div>
                     </div>
                     {% endfor %}
                 {% else %}
+
                     <div class="col-12">
+                        {% if current_user.id == user.id %}
                         <div class="alert alert-info">
                             У вас пока нет объявлений.
                             <a href="/add_accommodation" class="alert-link">Создайте первое!</a>
                         </div>
+                        {% else %}
+                        <div class="alert alert-info">
+                            У пользователя пока нет объявлений.
+                        </div>
+                        {% endif %}
                     </div>
                 {% endif %}
             </div>

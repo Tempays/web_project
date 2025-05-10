@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, url_for, Response
 
 from data import db_session
 from data.accommodation import Accommodation
@@ -6,6 +6,7 @@ from data.db_session import create_session
 from data.user import User
 from forms import RegisterForm, LoginForm, AccommodationAddForm, ProfileForm
 from flask_login import login_user, LoginManager, logout_user, current_user
+import time
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'special_secret_key_kyoma'
@@ -13,6 +14,8 @@ app.config['SECRET_KEY'] = 'special_secret_key_kyoma'
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+
+COUNT = 0
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -103,9 +106,11 @@ def add_accommodation():
         photo_path = f'static/images/accommodation_images/{accommodation.id}.jpg'
         with open(photo_path, 'wb') as photo:
             photo.write(form.photo.data.read())
+        photo_path = f'images/accommodation_images/{accommodation.id}.jpg'
         accommodation.photo_path = photo_path
         db_sess.commit()
-        return 'Успешно'
+        returning_to_main = True
+        return Response('Перенаправляем через 3 секунды...', headers={'Refresh': '3; url=' + url_for('main_page')})
     return render_template('advertisement.html', form=form)
 
 
@@ -123,9 +128,11 @@ def user_profile(user_id):
         photo_path = f'static/images/users/{user_id}.jpg'
         with open(photo_path, 'wb') as photo:
             photo.write(form.photo.data.read())
+        photo_path = f'images/users/{user_id}.jpg'
         user.picture_path = photo_path
         db_sess.commit()
-    return render_template('user_profile.html', user=user, date=date, rating=rating, form=form, filename=filename)
+    return render_template('user_profile.html', user=user, date=date, rating=rating, form=form, filename=filename,
+                           accommodations=user.housing)
 
 
 @app.route('/accommodation_page/<accommodation_id>')
