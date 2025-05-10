@@ -29,7 +29,9 @@ def main():
 
 @app.route('/')
 def main_page():
-    return render_template('main.html')
+    db_sess = db_session.create_session()
+    news = db_sess.query(Accommodation)
+    return render_template('main.html', accommodations=news)
 
 
 @app.route('/register', methods=['GET', 'POST'])
