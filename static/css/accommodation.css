@@ -1,0 +1,45 @@
+.stars {
+    color: #ffd700;
+    margin-right: 0.5rem;
+}
+
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+.info-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.label {
+    font-weight: bold;
+    color: #333;
+    margin-right: 5px;
+}
+.value {
+    color: #555;
+}
+.stars {
+    color: #f5c518;
+    font-size: 1.2em;
+}
+img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}

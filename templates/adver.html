@@ -1,47 +1,26 @@
 {% extends 'base.html' %}
 
-{% block title%}
-Объявление
-{% endblock %}
+{% block title %}Объявление{% endblock %}
 
-{% block body%}
+{% block body %}
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/accommodation.css') }}">
+
+</head>
 <div class="container">
-    <div class="info-item">
-                <span class="label">{{ accommodation.name }}:</span>
-                <span class="value"></span>
-            </div>
-<br>
-<br>
-<br>
-    <img src="{{ url_for('static', filename=filename)}}" alt="Фото жилья" width="500px" height="250px">
-<br>
-<br>
-<br>
-    <div class="info-item">
-                <span class="label">Адрес:</span>
-                <span class="value">{{ accommodation.address }}</span>
-            </div>
-    <br>
-    <div class="info-item">
-                <span class="label">Цена:</span>
-                <span class="value">{{ accommodation.cost }}</span>
-            </div>
-    <br>
-    <div class="info-item">
-                <span class="value"><a href="/user_profile/{{ accommodation.owner.id }}">Владелец</a></span>
-    </div>
-    <br>
-    <div class="info-item">
-                <span class="label">Описание:</span>
-                <span class="value">{{ accommodation.description }}</span>
-            </div>
-    <div class="info-item">
-        <span class="label">Дата подачи объявления</span>
-        <span> {{ accommodation.date }} </span>
-    </div>
-    <div class="info-item">
-        <span class="label">Оценка</span>
-        <span> {{ accommodation.rating }} {{ rating }}</span>
-    </div>
+    <h2>{{ accommodation.name }}</h2>
+    <img src="{{ url_for('static', filename=filename) }}" alt="Фото жилья">
+    <div class="info-item"><span class="label">Адрес:</span> <span class="value">{{ accommodation.address }}</span></div>
+    <div class="info-item"><span class="label">Цена:</span> <span class="value">{{ accommodation.cost }}</span></div>
+    <div class="info-item"><span class="label">Описание:</span> <span class="value">{{ accommodation.description }}</span></div>
+    <div class="info-item"><span class="label">Дата подачи объявления:</span> <span class="value">{{ date }}</span></div>
+    <div class="info-item"><span class="label">Рейтинг:</span> <span class="stars">{{ rating }}</span></div>
+    <div class="info-item"><span class="label">Владелец:</span> <span class="value"><a href="/user_profile/{{ accommodation.owner.id }}">Профиль владельца</a></span></div>
+    {% if number %}
+    <div class="info-item"><span class="label">Связаться с владельцем:</span> <span class="value">{{ accommodation.owner.phone_number }} / {{ accommodation.owner.email }}</span></div>
+    {% else %}
+    <div class="info-item"><span class="label">Связаться с владельцем:</span> <span class="value">{{ accommodation.owner.email }}</span></div>
+    {% endif %}
 </div>
 {% endblock %}

@@ -136,11 +136,13 @@ def accommodation_page(accommodation_id):
         return redirect('/#')
     filename = accommodation.photo_path[6:]
     rating = '★' * int(accommodation.rating) + '☆' * (5 - int(accommodation.rating))
-    return render_template('adver.html', accommodation=accommodation, filename=filename, rating=rating)
-
-
-
-
+    date = '.'.join((str(accommodation.date)).split()[0].split('-'))
+    owner = accommodation.owner
+    number = False
+    if owner.phone_number is not None:
+        number = True
+    return render_template('adver.html', accommodation=accommodation, filename=filename, rating=rating,
+                           number=number, date=date)
 
 
 if __name__ == '__main__':

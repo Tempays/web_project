@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2dcbb418-6982-4c5f-bc42-9e94db512c44" name="Changes" comment="Реализована загрузка аватара на странице профиля">
+    <list default="true" id="2dcbb418-6982-4c5f-bc42-9e94db512c44" name="Changes" comment="Прототип страницы объявления">
+      <change afterPath="$PROJECT_DIR$/static/css/accommodation.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/accommodation.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/accommodation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/adver.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/adver.html" afterDir="false" />
     </list>
@@ -174,7 +175,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746471676625</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Прототип страницы объявления">
+      <option name="closed" value="true" />
+      <created>1746815162323</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1746815162323</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -185,6 +194,22 @@
     <MESSAGE value="data.db" />
     <MESSAGE value="шаблон профиля пользователя" />
     <MESSAGE value="Реализована загрузка аватара на странице профиля" />
-    <option name="LAST_COMMIT_MESSAGE" value="Реализована загрузка аватара на странице профиля" />
+    <MESSAGE value="Прототип страницы объявления" />
+    <option name="LAST_COMMIT_MESSAGE" value="Прототип страницы объявления" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/forms.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>116</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
