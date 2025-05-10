@@ -34,3 +34,11 @@ class ProfileForm(FlaskForm):
     submit = SubmitField('Подтвердить')
 
 
+class ChangeAccommodationForm(FlaskForm):
+    name = StringField('Название', validators=[DataRequired()])
+    description = StringField('Описание', validators=[DataRequired()])
+    cost = StringField('Стоимость', validators=[DataRequired()])
+    photo = FileField('Фото', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Только изображения!')])
+    submit = SubmitField('Подтвердить')
+
+

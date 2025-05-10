@@ -4,9 +4,8 @@ from data import db_session
 from data.accommodation import Accommodation
 from data.db_session import create_session
 from data.user import User
-from forms import RegisterForm, LoginForm, AccommodationAddForm, ProfileForm
+from forms import RegisterForm, LoginForm, AccommodationAddForm, ProfileForm, ChangeAccommodationForm
 from flask_login import login_user, LoginManager, logout_user, current_user
-import time
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'special_secret_key_kyoma'
@@ -109,8 +108,7 @@ def add_accommodation():
         photo_path = f'images/accommodation_images/{accommodation.id}.jpg'
         accommodation.photo_path = photo_path
         db_sess.commit()
-        returning_to_main = True
-        return Response('Перенаправляем через 3 секунды...', headers={'Refresh': '3; url=' + url_for('main_page')})
+        return Response('Успешно! Перенаправляем через 3 секунды...', headers={'Refresh': '3; url=' + url_for('main_page')})
     return render_template('advertisement.html', form=form)
 
 
@@ -150,6 +148,39 @@ def accommodation_page(accommodation_id):
         number = True
     return render_template('adver.html', accommodation=accommodation, filename=filename, rating=rating,
                            number=number, date=date)
+
+
+@app.route('/delete/<accommodation_id>')
+def delete_accommodation(accommodation_id):
+    db_sess = create_session()
+    accommodation = db_sess.query(Accommodation).where(Accommodation.id == accommodation_id).first()
+    if not accommodation:
+        return redirect('/#')
+    user_id = accommodation.owner.id
+    if current_user.id == accommodation.owner.id:
+        db_sess.delete(db_sess.query(Accommodation).filter(Accommodation.id == accommodation_id).first())
+        db_sess.commit()
+    return redirect(f'/user_profile/{user_id}')
+
+
+@app.route('/change/<accommodation_id>', methods=['GET', 'POST'])
+def change_accommodation(accommodation_id):
+    db_sess = create_session()
+    accommodation = db_sess.query(Accommodation).where(Accommodation.id == accommodation_id).first()
+    form = ChangeAccommodationForm()
+    if form.validate_on_submit():
+        accommodation.name = form.name.data
+        accommodation.cost = form.cost.data
+        accommodation.description = form.description.data
+        with open('static/' + accommodation.photo_path, 'wb') as photo:
+            photo.write(form.photo.data.read())
+        return redirect('/')
+    if not accommodation:
+        return redirect('/#')
+    if current_user.id == accommodation.owner.id:
+        return render_template('advertisement.html', form=form)
+    else:
+        return redirect('/#')
 
 
 if __name__ == '__main__':
