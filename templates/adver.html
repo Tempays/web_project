@@ -10,7 +10,10 @@
 </head>
 <div class="container">
     <h2>{{ accommodation.name }}</h2>
-    <img src="{{ url_for('static', filename=filename) }}" alt="Фото жилья">
+    <img src="{{ url_for('static', filename=accommodation.photo_path) }}"
+                                 class="card-img-top img-fluid"
+                                 alt="{{ accommodation.name }}"
+                                 style="height: 200px; object-fit: cover;">
     <div class="info-item"><span class="label">Адрес:</span> <span class="value">{{ accommodation.address }}</span></div>
     <div class="info-item"><span class="label">Цена:</span> <span class="value">{{ accommodation.cost }}</span></div>
     <div class="info-item"><span class="label">Описание:</span> <span class="value">{{ accommodation.description }}</span></div>
