@@ -1,6 +1,6 @@
 import flask_wtf
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileAllowed, FileRequired
+from flask_wtf.file import FileAllowed, FileRequired, MultipleFileField
 from wtforms.fields.simple import EmailField, PasswordField, StringField, SubmitField, BooleanField, FileField
 from wtforms.validators import DataRequired
 
@@ -25,7 +25,7 @@ class AccommodationAddForm(FlaskForm):
     description = StringField('Описание жилья', validators=[DataRequired()])
     cost = StringField('Стоимость', validators=[DataRequired()])
     address = StringField('Адрес (Разделяйте значения запятой)', validators=[DataRequired()])
-    photo = FileField('Фото', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Только изображения!')])
+    photo = MultipleFileField('Фото', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'])])
     submit = SubmitField('Подтвердить')
 
 

@@ -1,14 +1,17 @@
-from flask import Flask, render_template, redirect, request, url_for, Response
+from pathlib import Path
 
+from flask import Flask, render_template, redirect, request, url_for, Response
+import os
 from data import db_session
 from data.accommodation import Accommodation
 from data.db_session import create_session
 from data.user import User
 from forms import RegisterForm, LoginForm, AccommodationAddForm, ProfileForm, ChangeAccommodationForm
 from flask_login import login_user, LoginManager, logout_user, current_user
+from random import shuffle
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'special_secret_key_kyoma'
+app.config['SECRET_KEY'] = 'SECr  et___k3y...:::EL_PSY_KONGROO::...yek_terces'
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -30,8 +33,9 @@ def main():
 @app.route('/')
 def main_page():
     db_sess = db_session.create_session()
-    news = db_sess.query(Accommodation)
-    return render_template('main.html', accommodations=news)
+    accommodations = db_sess.query(Accommodation).all()
+    shuffle(accommodations)
+    return render_template('main.html', accommodations=accommodations)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -104,10 +108,17 @@ def add_accommodation():
         )
         db_sess.add(accommodation)
         db_sess.commit()
-        photo_path = f'static/images/accommodation_images/{accommodation.id}.jpg'
-        with open(photo_path, 'wb') as photo:
-            photo.write(form.photo.data.read())
-        photo_path = f'images/accommodation_images/{accommodation.id}.jpg'
+        photo_path = f'static/images/accommodation_images/{accommodation.id}_folder/'
+        try:
+            os.makedirs(photo_path)
+        except FileExistsError:
+            pass
+        count = 0
+        for file in form.photo.data:
+            count += 1
+            with open(photo_path + str(count) + '.jpg', 'wb') as photo:
+                photo.write(file.read())
+        photo_path = f'images/accommodation_images/{accommodation.id}_folder'
         accommodation.photo_path = photo_path
         db_sess.commit()
         return Response('Успешно! Перенаправляем через 3 секунды...', headers={'Refresh': '3; url=' + url_for('main_page')})
@@ -148,8 +159,11 @@ def accommodation_page(accommodation_id):
     number = False
     if owner.phone_number is not None:
         number = True
+    path = Path(f'static/images/accommodation_images/{accommodation.id}_folder')
+    pic_number = sum(1 for x in path.iterdir())
+    images = [f'images/accommodation_images/{accommodation.id}_folder/{x}.jpg' for x in range(1, pic_number + 1)]
     return render_template('adver.html', accommodation=accommodation, filename=filename, rating=rating,
-                           number=number, date=date)
+                           number=number, date=date, images=images)
 
 
 @app.route('/delete/<accommodation_id>')

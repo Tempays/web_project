@@ -69,7 +69,7 @@
                     {% for accommodation in accommodations %}
                     <div class="col-12 col-md-6 col-lg-4 mb-4">
                         <div class="card h-100 shadow-sm">
-                            <img src="{{ url_for('static', filename=accommodation.photo_path) }}"
+                            <img src="{{ url_for('static', filename=accommodation.photo_path + '/1.jpg') }}"
                                  class="card-img-top img-fluid"
                                  alt="{{ accommodation.name }}"
                                  style="height: 200px; object-fit: cover;">
@@ -84,10 +84,14 @@
                                     <span class="badge bg-warning text-dark">
                                         {{ accommodation.price }}₽ / ночь
                                     </span>
-                                    {% if current_user.id == user.id %}
                                     <div class="btn-group">
-                                        <a href="/change/{{ accommodation.id }}"
+                                    <a href="/accommodation_page/{{ accommodation.id }}"
                                            class="btn btn-sm btn-outline-secondary">
+                                            Просмотреть</a>
+                                    {% if current_user.id == user.id %}
+
+                                        <a href="/change/{{ accommodation.id }}"
+                                           class="btn btn-sm btn-outline-success">
                                             Редактировать
                                         </a>
                                         <a href="/delete/{{ accommodation.id }}"

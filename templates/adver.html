@@ -4,16 +4,58 @@
 
 {% block body %}
 
-<head>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/accommodation.css') }}">
 
-</head>
 <div class="container">
     <h2>{{ accommodation.name }}</h2>
-    <img src="{{ url_for('static', filename=accommodation.photo_path) }}"
-                                 class="card-img-top img-fluid"
-                                 alt="{{ accommodation.name }}"
-                                 style="height: 200px; object-fit: cover;">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <style>
+        .swiper {
+            width: 600px;
+            height: 400px;
+            margin: auto;
+        }
+        .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f7f7f7;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .swiper-slide img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+    </style>
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            {% for image in images %}
+            <div class="swiper-slide">
+                <img src="{{ url_for('static', filename=image) }}" alt="Фото">
+            </div>
+            {% endfor %}
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.swiper', {
+            loop: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+    </script>
     <div class="info-item"><span class="label">Адрес:</span> <span class="value">{{ accommodation.address }}</span></div>
     <div class="info-item"><span class="label">Цена:</span> <span class="value">{{ accommodation.cost }}</span></div>
     <div class="info-item"><span class="label">Описание:</span> <span class="value">{{ accommodation.description }}</span></div>
