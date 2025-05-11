@@ -1,8 +1,8 @@
 from pathlib import Path
 
-from flask import Flask, render_template, redirect, request, url_for, Response
+from flask import Flask, render_template, redirect, request, url_for, Response, make_response, jsonify
 import os
-from data import db_session
+from data import db_session, users_api
 from data.accommodation import Accommodation
 from data.db_session import create_session
 from data.user import User
@@ -17,8 +17,6 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 
-COUNT = 0
-
 @login_manager.user_loader
 def load_user(user_id):
     db_sess = db_session.create_session()
@@ -27,6 +25,7 @@ def load_user(user_id):
 
 def main():
     db_session.global_init("db/data.db")
+    app.register_blueprint(users_api.blueprint)
     app.run()
 
 
@@ -197,6 +196,11 @@ def change_accommodation(accommodation_id):
         return render_template('advertisement.html', form=form)
     else:
         return redirect('/#')
+
+
+@app.errorhandler(400)
+def bad_request(_):
+    return make_response(jsonify({'error': 'Bad Request'}), 400)
 
 
 if __name__ == '__main__':
