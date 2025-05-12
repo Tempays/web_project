@@ -4,10 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2dcbb418-6982-4c5f-bc42-9e94db512c44" name="Changes" comment="User API полностью доработан и протестирован">
-      <change afterPath="$PROJECT_DIR$/data/accommodation_api.py" afterDir="false" />
+    <list default="true" id="2dcbb418-6982-4c5f-bc42-9e94db512c44" name="Changes" comment="Accommodation API доработан до базовых функций и протестирован">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/accommodation.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/accommodation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/accommodation.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/accommodation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/user_profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/user_profile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/adver.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/adver.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user_profile.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -60,7 +67,7 @@
       <recent name="C:\GenuineWebProject" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.apitest">
+  <component name="RunManager" selected="Python.main">
     <configuration name="UsersApiTests" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="GenuineWebProject" />
       <option name="ENV_FILES" value="" />
@@ -324,7 +331,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747046652017</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Accommodation API доработан до базовых функций и протестирован">
+      <option name="closed" value="true" />
+      <created>1747061579936</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1747061579936</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -342,7 +357,8 @@
     <MESSAGE value="Реализовано множественное добавление фото" />
     <MESSAGE value="Добавлен api для User, пока не тестировался" />
     <MESSAGE value="User API полностью доработан и протестирован" />
-    <option name="LAST_COMMIT_MESSAGE" value="User API полностью доработан и протестирован" />
+    <MESSAGE value="Accommodation API доработан до базовых функций и протестирован" />
+    <option name="LAST_COMMIT_MESSAGE" value="Accommodation API доработан до базовых функций и протестирован" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

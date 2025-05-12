@@ -38,7 +38,7 @@ class ChangeAccommodationForm(FlaskForm):
     name = StringField('Название', validators=[DataRequired()])
     description = StringField('Описание', validators=[DataRequired()])
     cost = StringField('Стоимость', validators=[DataRequired()])
-    photo = FileField('Фото', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'], 'Только изображения!')])
+    photo = MultipleFileField('Фото', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'])])
     submit = SubmitField('Подтвердить')
 
 

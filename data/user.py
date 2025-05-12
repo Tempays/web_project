@@ -12,12 +12,14 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     __tablename__ = 'User'
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     username = sqlalchemy.Column(sqlalchemy.String, unique=True)
-    rating = sqlalchemy.Column(sqlalchemy.Integer, default=0)
+    rating = sqlalchemy.Column(sqlalchemy.Integer, default='')
     email = sqlalchemy.Column(sqlalchemy.String)
     hashed_password = sqlalchemy.Column(sqlalchemy.String, unique=True)
     registration_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now())
     picture_path = sqlalchemy.Column(sqlalchemy.String)
     phone_number = sqlalchemy.Column(sqlalchemy.String)
+    rated_accommodations = sqlalchemy.Column(sqlalchemy.String, default='')
+    rated_users = sqlalchemy.Column(sqlalchemy.String, default='')
     housing = orm.relationship('Accommodation', back_populates='owner')
 
     def set_password(self, password):

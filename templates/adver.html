@@ -9,26 +9,6 @@
 <div class="container">
     <h2>{{ accommodation.name }}</h2>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-    <style>
-        .swiper {
-            width: 600px;
-            height: 400px;
-            margin: auto;
-        }
-        .swiper-slide {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #f7f7f7;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-        .swiper-slide img {
-            width: 100%;
-            height: auto;
-            border-radius: 12px;
-        }
-    </style>
     <div class="swiper">
         <div class="swiper-wrapper">
             {% for image in images %}
@@ -57,7 +37,7 @@
         });
     </script>
     <div class="info-item"><span class="label">Адрес:</span> <span class="value">{{ accommodation.address }}</span></div>
-    <div class="info-item"><span class="label">Цена:</span> <span class="value">{{ accommodation.cost }}</span></div>
+    <div class="info-item"><span class="label">Цена:</span> <span class="value">{{ accommodation.cost }} / ночь</span></div>
     <div class="info-item"><span class="label">Описание:</span> <span class="value">{{ accommodation.description }}</span></div>
     <div class="info-item"><span class="label">Дата подачи объявления:</span> <span class="value">{{ date }}</span></div>
     <div class="info-item"><span class="label">Рейтинг:</span> <span class="stars">{{ rating }}</span></div>
@@ -66,6 +46,24 @@
     <div class="info-item"><span class="label">Связаться с владельцем:</span> <span class="value">{{ accommodation.owner.phone_number }} / {{ accommodation.owner.email }}</span></div>
     {% else %}
     <div class="info-item"><span class="label">Связаться с владельцем:</span> <span class="value">{{ accommodation.owner.email }}</span></div>
+    {% endif %}
+    {% if show_rate and accommodation.owner.id != current_user.id %}
+         <div class="info-item rating-container">
+        <span class="label">Поставить оценку:</span>
+        <form method="POST" action="rate/{{ accommodation.id }}">
+            <input
+                type="range"
+                name="rating"
+                min="1"
+                max="5"
+                step="0.5"
+                value="3"
+                oninput="this.nextElementSibling.textContent = this.value">
+            <span class="rating-value">3</span>
+            <br>
+            <button type="submit" class="btn btn-sm btn-outline-secondary">Оценить</button>
+        </form>
+    </div>
     {% endif %}
 </div>
 {% endblock %}

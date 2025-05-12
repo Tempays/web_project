@@ -43,3 +43,33 @@ a {
 a:hover {
     text-decoration: underline;
 }
+.swiper {
+    width: 600px;
+    height: 400px;
+    margin: auto;
+}
+.swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f7f7f7;
+    border-radius: 12px;
+    overflow: hidden;
+}
+.swiper-slide img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+.rating-container {
+    margin-top: 20px;
+    text-align: center;
+}
+.rating-container input[type="range"] {
+    width: 300px;
+    margin-top: 10px;
+}
+.rating-value {
+    font-size: 1.2em;
+    font-weight: bold;
+}
