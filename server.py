@@ -298,5 +298,15 @@ def user_rate(user_id):
     return redirect(f'/user_profile/{user_id}')
 
 
+@app.route('/rent/<accommodation_id>', methods=['GET', 'POST'])
+def rent(accommodation_id):
+    if request.method == "POST":
+        return redirect('/')
+    else:
+        db_sess = db_session.create_session()
+        accommodation = db_sess.query(Accommodation).where(Accommodation.id == accommodation_id).first()
+        return render_template('rent.html', accommodation=accommodation)
+
+
 if __name__ == '__main__':
     main()
