@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title%}
+Аренда
+{% endblock %}
+
+{% block body%}
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/accommodation.css') }}">
+
+</head>
+<div class="container">
+    <h2>Контакты владельца:</h2>
+    <div class="info-item"><span class="label">Электронная почта:</span> <span class="value">{{ accommodation.owner.email }}</span></div>
+    <div class="info-item"><span class="label">Телефон:</span> <span class="value">{{ accommodation.owner.phone_number }}</span></div>
+    <h4>Спасибо, что воспользовались нашим сервисом, оцените пожалуйста работу сайта.</h4>
+    <div class="form-floating"> <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"> <label for="floatingInput"></label> </div>
+    <br>
+    <a class="btn btn-warning" href="/">Отправить</a>
+</div>
+{% endblock %}
