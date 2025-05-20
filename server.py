@@ -165,10 +165,13 @@ def user_profile(user_id):
         photo_path = f'images/users/{user_id}.jpg'
         user.picture_path = photo_path
         db_sess.commit()
-    if current_user.rated_users != '':
-        current_user_rated = [int(x) for x in current_user.rated_users.split(', ') if x != '']
-        if int(user_id) in current_user_rated:
-            show_rate = False
+    if current_user.is_authenticated:
+        if current_user.rated_users != '':
+            current_user_rated = [int(x) for x in current_user.rated_users.split(', ') if x != '']
+            if int(user_id) in current_user_rated:
+                show_rate = False
+    else:
+        show_rate = False
     return render_template('user_profile.html', user=user, date=date, rating=rating, form=form, filename=filename,
                            accommodations=user.housing, show_rate=show_rate)
 
@@ -195,10 +198,13 @@ def accommodation_page(accommodation_id):
     path = Path(f'static/images/accommodation_images/{accommodation.id}_folder')
     pic_number = sum(1 for x in path.iterdir())
     images = [f'images/accommodation_images/{accommodation.id}_folder/{x}.jpg' for x in range(1, pic_number + 1)]
-    if current_user.rated_accommodations != '':
-        current_user_rated = [int(x) for x in current_user.rated_accommodations.split(', ') if x != '']
-        if int(accommodation_id) in current_user_rated:
-            show_rate = False
+    if current_user.is_authenticated:
+        if current_user.rated_accommodations != '':
+            current_user_rated = [int(x) for x in current_user.rated_accommodations.split(', ') if x != '']
+            if int(accommodation_id) in current_user_rated:
+                show_rate = False
+    else:
+        show_rate = False
     return render_template('adver.html', accommodation=accommodation, filename=filename, rating=rating,
                            number=number, date=date, images=images, show_rate=show_rate)
 
@@ -276,10 +282,12 @@ def accommodation_rate(accommodation_id):
 
 @app.route('/user_profile/rate/<int:user_id>', methods=['POST'])
 def user_rate(user_id):
+    if not current_user.is_authenticated:
+        return make_response(jsonify({"error": 'Forbiddeb'}), 403)
     new_rating = request.form.get("rating")
     db_sess = db_session.create_session()
     user = db_sess.query(User).where(User.id == user_id).first()
-    if user.rating == '' or user.raiting == 0:
+    if user.rating == '' or user.rating == 0:
         user.rating = str(new_rating)
     else:
         user.rating = str(user.rating) + f', {new_rating}'
@@ -287,8 +295,17 @@ def user_rate(user_id):
     user_now = db_sess.query(User).where(User.id == current_user.id).first()
     user_now.rated_users += f'{user_id}, '
     db_sess.commit()
-    return redirect(f'/accommodation_page/{user_id}')
+    return redirect(f'/user_profile/{user_id}')
 
+
+@app.route('/rent/<accommodation_id>', methods=['GET', 'POST'])
+def rent(accommodation_id):
+    if request.method == "POST":
+        return redirect('/')
+    else:
+        db_sess = db_session.create_session()
+        accommodation = db_sess.query(Accommodation).where(Accommodation.id == accommodation_id).first()
+        return render_template('rent.html', accommodation=accommodation)
 
 
 if __name__ == '__main__':

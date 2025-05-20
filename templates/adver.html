@@ -42,11 +42,6 @@
     <div class="info-item"><span class="label">Дата подачи объявления:</span> <span class="value">{{ date }}</span></div>
     <div class="info-item"><span class="label">Рейтинг:</span> <span class="stars">{{ rating }}</span></div>
     <div class="info-item"><span class="label">Владелец:</span> <span class="value"><a href="/user_profile/{{ accommodation.owner.id }}">Профиль владельца</a></span></div>
-    {% if number %}
-    <div class="info-item"><span class="label">Связаться с владельцем:</span> <span class="value">{{ accommodation.owner.phone_number }} / {{ accommodation.owner.email }}</span></div>
-    {% else %}
-    <div class="info-item"><span class="label">Связаться с владельцем:</span> <span class="value">{{ accommodation.owner.email }}</span></div>
-    {% endif %}
     {% if show_rate and accommodation.owner.id != current_user.id %}
          <div class="info-item rating-container">
         <span class="label">Поставить оценку:</span>
@@ -64,6 +59,9 @@
             <button type="submit" class="btn btn-sm btn-outline-secondary">Оценить</button>
         </form>
     </div>
+    {% endif %}
+    {% if current_user.is_authenticated and accommodation.owner.id != current_user.id%}
+    <a class="btn btn-warning" href="/rent/{{ accommodation.id }}">Арендовать</a>
     {% endif %}
 </div>
 {% endblock %}
